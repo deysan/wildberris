@@ -18,7 +18,8 @@ module.exports = {
         { from: 'css', to: 'css' },
         { from: 'img', to: 'img' },
         { from: 'favicon', to: 'favicon' },
-        { from: 'index.html' }
+        { from: 'index.html' },
+        { from: 'goods.html' }
       ],
     }),
     new CleanWebpackPlugin()
