@@ -17,7 +17,7 @@ module.exports = {
       patterns: [
         { from: 'css', to: 'css' },
         { from: 'img', to: 'img' },
-        { from: 'db', to: 'db' },
+        { from: 'db/db.json', to: 'db' },
         { from: 'db/img', to: 'img' },
         { from: 'favicon', to: 'favicon' },
         { from: 'index.html' },
