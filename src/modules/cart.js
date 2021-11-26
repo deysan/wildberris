@@ -5,6 +5,7 @@ const cart = function () {
   const goodsList = document.querySelector('.long-goods-list');
   const cartTable = document.querySelector('.cart-table__goods');
   const cartPrice = document.querySelector('.card-table__total');
+  const modalForm = document.querySelector('.modal-form');
 
   const addToCart = (id) => {
     const goods = JSON.parse(localStorage.getItem('goods'));
@@ -76,7 +77,7 @@ const cart = function () {
       const table = document.createElement('tr');
       const price = +good.price * +good.count;
       totalPrice += price;
-      
+
       table.innerHTML =
         `<td>${good.name}</td>
         <td>$${good.price}</td>
@@ -102,6 +103,34 @@ const cart = function () {
       })
     });
   }
+
+  const sendForm = () => {
+    const name = modalForm.querySelector('input[name=nameCustomer]');
+    const phone = modalForm.querySelector('input[name=phoneCustomer]');
+    const cartArray = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+
+    if (name.value.length && phone.value.length && cartArray.length > 0) {
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        body: JSON.stringify({
+          cart: cartArray,
+          name: name.value,
+          phone: phone.value
+        })
+      }).then(() => {
+        cart.style.display = '';
+      }).then(() => {
+        name.value = '';
+        phone.value = '';
+        localStorage.removeItem('cart');
+      })
+    }
+  }
+
+  modalForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    sendForm();
+  })
 
   cartBtn.addEventListener('click', () => {
     const cartArray = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
