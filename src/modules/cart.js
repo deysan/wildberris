@@ -71,7 +71,7 @@ const cart = function () {
   const renderCartGoods = (goods) => {
     let totalPrice = 0;
     cartTable.innerHTML = '';
-    cartPrice.innerHTML = totalPrice;
+    cartPrice.innerHTML = `$${totalPrice}`;
 
     goods.forEach((good) => {
       const table = document.createElement('tr');
@@ -88,7 +88,7 @@ const cart = function () {
         <td><button class="cart-btn-delete"">x</button></td>`
 
       cartTable.append(table);
-      cartPrice.innerHTML = totalPrice;
+      cartPrice.innerHTML = `$${totalPrice}`;
 
       table.addEventListener('click', (event) => {
         event.preventDefault();
