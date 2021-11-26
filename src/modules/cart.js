@@ -4,6 +4,7 @@ const cart = function () {
   const closeBtn = document.querySelector('.modal-close');
   const goodsList = document.querySelector('.long-goods-list');
   const cartTable = document.querySelector('.cart-table__goods');
+  const cartPrice = document.querySelector('.card-table__total');
 
   const addToCart = (id) => {
     const goods = JSON.parse(localStorage.getItem('goods'));
@@ -67,20 +68,26 @@ const cart = function () {
   }
 
   const renderCartGoods = (goods) => {
+    let totalPrice = 0;
     cartTable.innerHTML = '';
+    cartPrice.innerHTML = totalPrice;
 
     goods.forEach((good) => {
       const table = document.createElement('tr');
+      const price = +good.price * +good.count;
+      totalPrice += price;
+      
       table.innerHTML =
         `<td>${good.name}</td>
         <td>$${good.price}</td>
         <td><button class="cart-btn-minus"">-</button></td>
         <td>${good.count}</td>
         <td><button class=" cart-btn-plus"">+</button></td>
-        <td>$${+good.price * +good.count}</td>
+        <td>$${price}</td>
         <td><button class="cart-btn-delete"">x</button></td>`
 
       cartTable.append(table);
+      cartPrice.innerHTML = totalPrice;
 
       table.addEventListener('click', (event) => {
         event.preventDefault();
